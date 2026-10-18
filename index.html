@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Physica AI – WASSCE Physics Tutor</title>
+<style>
+:root{--bg:#f7f8fb;--card:#fff;--ink:#14213d;--mute:#5b667a;--line:#e3e7ef;--brand:#0b7a4b;--brand2:#fcd116;--user:#e8f5ee;--red:#ce1126;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1420;--card:#172033;--ink:#eef2fa;--mute:#9aa6bd;--line:#26324a;--user:#12372a}}
+:root[data-theme="dark"]{--bg:#0e1420;--card:#172033;--ink:#eef2fa;--mute:#9aa6bd;--line:#26324a;--user:#12372a}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}
+.flag{height:5px;background:linear-gradient(90deg,var(--red) 33%,var(--brand2) 33% 66%,var(--brand) 66%)}
+header,section,footer{max-width:900px;margin:0 auto;padding:20px 18px}
+nav{display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;font-size:1.25rem}.logo span{color:var(--brand)}
+nav a{color:var(--brand);font-weight:600;text-decoration:none;font-size:.95rem}
+.hero{text-align:center;padding:36px 0 10px}
+.hero h1{font-size:clamp(1.9rem,6vw,3rem);line-height:1.15;margin:0 0 12px}
+.hero h1 em{font-style:normal;color:var(--brand)}
+.hero p{color:var(--mute);max-width:560px;margin:0 auto 20px;font-size:1.05rem}
+.btn{display:inline-block;background:var(--brand);color:#fff;border:0;padding:12px 22px;border-radius:12px;font-weight:700;font-size:1rem;cursor:pointer;text-decoration:none}
+.btn:disabled{opacity:.5}
+h2{font-size:1.4rem;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card h3{margin:0 0 6px;font-size:1.05rem}.card p{margin:0;color:var(--mute);font-size:.93rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:7px 13px;font-size:.88rem;cursor:pointer}
+.chip:hover{border-color:var(--brand)}
+#chat{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+#log{height:min(60vh,460px);overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{padding:10px 13px;border-radius:12px;max-width:92%;white-space:pre-wrap;word-wrap:break-word;font-size:.97rem}
+.bot{background:var(--bg);border:1px solid var(--line);align-self:flex-start}
+.me{background:var(--user);align-self:flex-end}
+.bar{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
+textarea{flex:1;resize:none;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px;font:inherit;min-height:46px;max-height:120px}
+.note{color:var(--mute);font-size:.85rem;margin-top:8px}
+.formulas{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.f{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:10px 14px}
+.f b{display:block;font-size:.8rem;color:var(--mute);font-weight:600}
+.f code{font-size:1.02rem;font-family:ui-monospace,Menlo,Consolas,monospace}
+footer{text-align:center;color:var(--mute);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="flag"></div>
+<header>
+  <nav><div class="logo">Physica<span>AI</span> 🇬🇭</div><a href="#tutor">Ask now</a></nav>
+  <div class="hero">
+    <h1>Pass WASSCE Physics with <em>step-by-step</em> help</h1>
+    <p>Ask any physics question. Physica AI explains it like a friend: formula, substitution, final answer with unit.</p>
+    <a class="btn" href="#tutor">Start asking</a>
+  </div>
+</header>
+
+<section>
+  <div class="grid">
+    <div class="card"><h3>1. Formula</h3><p>We write the correct formula first, so you know what to use.</p></div>
+    <div class="card"><h3>2. Substitute</h3><p>We put in your values carefully, with units.</p></div>
+    <div class="card"><h3>3. Answer</h3><p>Clear final answer plus a simple tip for the exam.</p></div>
+  </div>
+</section>
+
+<section id="tutor">
+  <h2>Ask Physica AI</h2>
+  <div class="chips" id="chips"></div>
+  <div id="chat">
+    <div id="log"><div class="msg bot">Hello! I’m Physica AI. Type any WASSCE physics question and I’ll solve it step by step. 🇬🇭</div></div>
+    <div class="bar">
+      <textarea id="q" rows="1" placeholder="Type your physics question…"></textarea>
+      <button class="btn" id="send">Send</button>
+    </div>
+  </div>
+  <p class="note" id="note">Tip: include all the numbers and units in your question.</p>
+</section>
+
+<section>
+  <h2>Quick formula sheet</h2>
+  <div class="formulas" id="fs"></div>
+</section>
+
+<footer>Physica AI · Built for Ghana SHS students · Always check answers with your teacher.</footer>
+
+<script>
+const topics=["A car accelerates from 5 m/s to 20 m/s in 6 s. Find the acceleration.","What is the difference between mass and weight?","A 12 V battery drives 3 A through a resistor. Find its resistance and power.","Explain why a spoon in water looks bent.","Calculate the heat needed to raise 2 kg of water by 30 °C (c = 4200 J/kg/K)."];
+const F=[["Velocity","v = u + at"],["Distance","s = ut + ½at²"],["Force","F = ma"],["Work done","W = F × d"],["Power","P = W / t"],["Ohm’s law","V = IR"],["Electrical power","P = IV"],["Wave speed","v = fλ"],["Heat energy","Q = mcΔθ"],["Pressure","P = F / A"],["Density","ρ = m / V"],["Lens formula","1/f = 1/u + 1/v"]];
+document.getElementById("fs").innerHTML=F.map(f=>`<div class="f"><b>${f[0]}</b><code>${f[1]}</code></div>`).join("");
+const log=document.getElementById("log"),q=document.getElementById("q"),send=document.getElementById("send"),note=document.getElementById("note");
+document.getElementById("chips").innerHTML=topics.map((t,i)=>`<button class="chip" data-i="${i}">${t.length>38?t.slice(0,36)+"…":t}</button>`).join("");
+document.getElementById("chips").addEventListener("click",e=>{const i=e.target.dataset.i;if(i!==undefined){q.value=topics[i];ask()}});
+let history=[];
+function add(cls,text){const d=document.createElement("div");d.className="msg "+cls;d.textContent=text;log.appendChild(d);log.scrollTop=log.scrollHeight;return d}
+async function ask(){
+  const text=q.value.trim();if(!text||send.disabled)return;
+  add("me",text);q.value="";
+  send.disabled=true;const out=add("bot","Thinking…");
+  history.push({role:"user",content:text});
+  try{
+    const res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history.slice(-8)})});
+    const data=await res.json();
+    if(!res.ok)throw new Error(data.error||"Request failed");
+    out.textContent=data.text;history.push({role:"assistant",content:data.text});
+  }catch(e){
+    out.textContent="Sorry, I couldn’t answer that. Check your internet and try again.";
+    history.pop();
+  }
+  send.disabled=false;log.scrollTop=log.scrollHeight;
+}
+send.addEventListener("click",ask);
+q.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();ask()}});
+</script>
+</body>
+</html>
